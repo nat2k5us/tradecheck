@@ -1,0 +1,14 @@
+# Python & Django
+*.pyc
+__pycache__/
+db.sqlite3
+.env
+venv/
+*.log
+
+# macOS system files
+.DS_Store
+
+# VSCode / IDE config
+.vscode/
+.idea/

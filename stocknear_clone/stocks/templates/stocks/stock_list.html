@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Stocks{% endblock %}
+{% block content %}
+  <h2>Stocks {% if query %}— search results for "{{ query }}" {% endif %}</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr><th>Symbol</th><th>Name</th><th>Last Price</th><th>Change %</th></tr>
+    </thead>
+    <tbody>
+      {% for s in stocks %}
+      <tr>
+        <td><a href="{% url 'stocks:detail' s.symbol %}">{{ s.symbol }}</a></td>
+        <td>{{ s.name }}</td>
+        <td>{{ s.last_price }}</td>
+        <td>{{ s.change_percent }}%</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="4">No stocks to display.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

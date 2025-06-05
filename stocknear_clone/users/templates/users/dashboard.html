@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-8 offset-md-2 text-center">
+      <h2 class="mb-4">Welcome, {{ request.user.username }}!</h2>
+      <p>You are successfully logged in.</p>
+      <p>
+        <a class="btn btn-outline-light me-2" href="{% url 'users:change_password' %}">
+          Change Password
+        </a>
+        <a class="btn btn-danger" href="{% url 'users:logout' %}">
+          Log Out
+        </a>
+      </p>
+    </div>
+  </div>
+{% endblock %}

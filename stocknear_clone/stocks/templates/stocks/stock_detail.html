@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}{{ stock.symbol }}{% endblock %}
+{% block content %}
+  <h2>{{ stock.symbol }} — {{ stock.name }}</h2>
+  <p>Last Price: ${{ stock.last_price }} (<span class="text-success">{{ stock.change_percent }}%</span>)</p>
+  <!-- Placeholder for charts, order flow, etc. -->
+  <div id="price-chart-container">
+    <!-- Later: embed Chart.js graph here -->
+  </div>
+{% endblock %}

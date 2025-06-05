@@ -1,0 +1,70 @@
+/* static/css/global.css */
+
+/* Ensure the container background stays dark */
+body {
+  background-color: #121212; /* a very dark gray (optional if you want deeper black) */
+  color: #e0e0e0;            /* off-white for better readability */
+}
+
+/* Links should be visible in dark mode */
+a {
+  color: #70c0ff;
+}
+a:hover {
+  color: #a0dfff;
+}
+
+/* Tables: dark background + light text */
+table {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+table th, table td {
+  border-color: #2e2e2e;
+}
+
+/* Cards / containers */
+.card, .card-body {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  border: 1px solid #2e2e2e;
+}
+
+/* Form inputs in dark mode */
+.form-control {
+  background-color: #2e2e2e;
+  color: #e0e0e0;
+  border: 1px solid #3e3e3e;
+}
+.form-control:focus {
+  background-color: #2e2e2e;
+  color: #e0e0e0;
+  border-color: #70c0ff;
+  box-shadow: 0 0 0 0.2rem rgba(112, 192, 255, 0.25);
+}
+
+/* Buttons: use outline-light or custom colors */
+.btn-outline-light {
+  color: #f8f9fa;
+  border-color: #f8f9fa;
+}
+.btn-outline-light:hover {
+  background-color: #f8f9fa;
+  color: #343a40;
+}
+
+/* Make scrollbar dark (WebKit browsers) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+::-webkit-scrollbar-thumb {
+  background: #3e3e3e;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5e5e5e;
+}
