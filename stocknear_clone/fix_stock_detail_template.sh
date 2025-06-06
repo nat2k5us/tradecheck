@@ -1,3 +1,37 @@
+#!/usr/bin/env bash
+#
+# fix_stock_detail_template.sh
+#
+# This script fixes the “Invalid filter: 'floatval'” error by updating
+# stocks/templates/stocks/stock_detail.html to check the first character
+# of changesPercentage (i.e. whether it starts with '-') instead of using floatval.
+#
+# Usage:
+#   chmod +x fix_stock_detail_template.sh
+#   ./fix_stock_detail_template.sh
+#
+
+set -euo pipefail
+
+# 1) Verify we’re in the Django project root
+if [[ ! -f "./manage.py" ]]; then
+  echo "❌  Error: manage.py not found in $(pwd)."
+  echo "    Please run this from your Django project root."
+  exit 1
+fi
+
+# 2) Ensure the template directory exists
+TEMPLATE_DIR="stocks/templates/stocks"
+DETAIL_TEMPLATE="${TEMPLATE_DIR}/stock_detail.html"
+
+if [[ ! -d "${TEMPLATE_DIR}" ]]; then
+  echo "⚠️   Directory ${TEMPLATE_DIR} does not exist; creating it."
+  mkdir -p "${TEMPLATE_DIR}"
+fi
+
+# 3) Overwrite stock_detail.html with corrected conditional
+echo "✏️  Overwriting ${DETAIL_TEMPLATE} to remove use of 'floatval'..."
+cat > "${DETAIL_TEMPLATE}" << 'EOF'
 {% extends "base.html" %}
 {% block title %}{{ stock.symbol }} Detail{% endblock %}
 
@@ -53,3 +87,9 @@
     </div>
   </div>
 {% endblock %}
+EOF
+
+echo "✅  ${DETAIL_TEMPLATE} has been updated."
+echo
+echo "🎉  Now restart your Django dev server to see the fix:"
+echo "    kill \$(lsof -iTCP:8000 -sTCP:LISTEN -t) && ./launch_it.sh"

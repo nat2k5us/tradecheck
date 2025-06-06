@@ -68,3 +68,15 @@ table th, table td {
 ::-webkit-scrollbar-thumb:hover {
   background: #5e5e5e;
 }
+
+/* Sidebar styling */
+.sidebar {
+  width: 240px;
+  min-height: 100vh;
+}
+.sidebar .nav-link {
+  color: #e0e0e0;
+}
+.sidebar .nav-link.active {
+  background-color: #343a40;
+}

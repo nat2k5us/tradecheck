@@ -1,22 +1,44 @@
 {% extends "base.html" %}
-{% block title %}Stocks{% endblock %}
+{% block title %}Top 100 Market Movers{% endblock %}
+
 {% block content %}
-  <h2>Stocks {% if query %}— search results for "{{ query }}" {% endif %}</h2>
-  <table class="table table-striped">
-    <thead>
-      <tr><th>Symbol</th><th>Name</th><th>Last Price</th><th>Change %</th></tr>
-    </thead>
-    <tbody>
-      {% for s in stocks %}
-      <tr>
-        <td><a href="{% url 'stocks:detail' s.symbol %}">{{ s.symbol }}</a></td>
-        <td>{{ s.name }}</td>
-        <td>{{ s.last_price }}</td>
-        <td>{{ s.change_percent }}%</td>
-      </tr>
-      {% empty %}
-      <tr><td colspan="4">No stocks to display.</td></tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+      <h2 class="mb-4 text-center">Top 100 Market Movers</h2>
+      <table class="table table-striped table-dark table-hover">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Change %</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in stocks %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>
+                <a href="{% url 'stocks:detail' s.symbol %}" class="text-info">
+                  {{ s.symbol }}
+                </a>
+              </td>
+              <td>{{ s.name }}</td>
+              <td>${{ s.price }}</td>
+              <td
+                class="{% if s.changesPercentage >= 0 %}text-success{% else %}text-danger{% endif %}"
+              >
+                {{ s.changesPercentage|floatformat:2 }}%
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="5" class="text-center">No data available.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 {% endblock %}

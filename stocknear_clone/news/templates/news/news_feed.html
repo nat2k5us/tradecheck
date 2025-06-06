@@ -1,15 +1,31 @@
 {% extends "base.html" %}
 {% block title %}Market News{% endblock %}
+
 {% block content %}
-  <h2>Market News</h2>
-  <ul class="list-group">
-    {% for n in items %}
-    <li class="list-group-item">
-      <small class="text-muted">{{ n.timestamp|date:"M d, Y H:i" }}</small><br>
-      <a href="{{ n.url }}" target="_blank">{{ n.headline }}</a>
-    </li>
-    {% empty %}
-    <li class="list-group-item">No news available.</li>
-    {% endfor %}
-  </ul>
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h2 class="mb-4 text-center">Market News</h2>
+      <ul class="list-group">
+        {% for n in items %}
+          <li class="list-group-item bg-dark text-light d-flex justify-content-between align-items-start">
+            <div>
+              <a href="{{ n.url }}" target="_blank" class="fw-bold text-info">
+                {{ n.headline }}
+              </a>
+              <div class="small text-muted mt-1">
+                {{ n.time_ago }} &middot; {{ n.source }}
+              </div>
+            </div>
+            <span class="badge bg-secondary rounded-pill">
+              {{ forloop.counter }}
+            </span>
+          </li>
+        {% empty %}
+          <li class="list-group-item bg-dark text-light text-center">
+            No news available.
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
 {% endblock %}
