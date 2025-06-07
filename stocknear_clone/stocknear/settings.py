@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 """
 Django settings for stocknear project.
 
@@ -35,12 +36,15 @@ INSTALLED_APPS = [
     'rest_framework',
     'users',
     'stocks',
-    'news',    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
+    'news',
+    'integrations',              
+
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
 ]
 
 # Tell Django to use our custom user model

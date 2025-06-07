@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Integrations{% endblock %}
+{% block content %}
+  <h2>Integrations</h2>
+  <table class="table table-dark">
+    <thead><tr><th>Provider</th><th>Username</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody>
+      {% for it in items %}
+      <tr>
+        <td>{{ it.get_provider_display }}</td>
+        <td>{{ it.username }}</td>
+        <td>
+          {% if it.verified %}
+            <span class="badge bg-success">Verified</span>
+          {% else %}
+            <span class="badge bg-danger">Unverified</span>
+          {% endif %}
+        </td>
+        <td>
+          <a class="btn btn-sm btn-primary" href="{% url 'integrations:edit' it.pk %}">Save/Update</a>
+          <a class="btn btn-sm btn-warning" href="{% url 'integrations:verify' it.pk %}">Verify</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="4">No integrations yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a class="btn btn-success" href="{% url 'integrations:add' %}">Add Integration</a>
+{% endblock %}
