@@ -131,3 +131,7 @@
   {% block extra_js %}{% endblock %}
 </body>
 </html>
+<!-- Sidebar: Integrations link -->
+<li class="nav-item mb-2">
+  <a class="nav-link text-light" href="{% url 'integrations:list' %}">Integrations</a>
+</li>

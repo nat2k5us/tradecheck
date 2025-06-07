@@ -1,6 +1,6 @@
 import os
 import requests
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404
 from django.http import Http404
 from .models import Stock
 
@@ -50,7 +50,6 @@ def stock_detail(request, symbol):
     symbol = symbol.upper()
     if not FMP_API_KEY:
         raise Http404("API key not configured.")
-
     url = f"https://financialmodelingprep.com/api/v3/quote/{symbol}?apikey={FMP_API_KEY}"
     try:
         resp = requests.get(url, timeout=10)
@@ -58,13 +57,12 @@ def stock_detail(request, symbol):
         data = resp.json()
         if not data:
             raise Http404(f"No data for symbol {symbol}")
-        stock_data = data[0]  # first (and only) element
+        stock_data = data[0]
     except Http404:
         raise
     except Exception as e:
         print(f"Error fetching FMP detail for {symbol}: {e}")
         raise Http404(f"Could not retrieve data for {symbol}")
-
     return render(request, "stocks/stock_detail.html", { "stock": stock_data })
 
 def stock_overview(request):
@@ -78,3 +76,29 @@ def etf_list(request):
     Stub ETF List page.
     """
     return render(request, "stocks/etf_list.html")
+
+# --- New Calendar views below ---
+
+def calendar_dividends(request):
+    """
+    Stub Dividends page.
+    """
+    return render(request, "stocks/calendar_dividends.html")
+
+def calendar_earnings(request):
+    """
+    Stub Earnings page.
+    """
+    return render(request, "stocks/calendar_earnings.html")
+
+def calendar_ipo(request):
+    """
+    Stub IPO page.
+    """
+    return render(request, "stocks/calendar_ipo.html")
+
+def calendar_economic(request):
+    """
+    Stub Economic calendar page.
+    """
+    return render(request, "stocks/calendar_economic.html")
